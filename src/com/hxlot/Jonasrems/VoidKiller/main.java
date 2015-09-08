@@ -16,6 +16,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.minecraft.server.v1_8_R1.World;
+
 public class main extends JavaPlugin implements Listener{
 	
 	public static Logger log = Bukkit.getLogger();
@@ -49,7 +51,12 @@ public class main extends JavaPlugin implements Listener{
 	
 	@EventHandler
 	public void onDamage(EntityDamageByBlockEvent e){
-		if(e.getCause() == DamageCause.VOID){
+		if(e.getEntity().getLocation().getY() <=-140){
+			if(e.getEntityType() == EntityType.PLAYER){
+				Player p = (Player) e.getEntity();
+			}
+			e.setCancelled(false);
+		}else if(e.getCause() == DamageCause.VOID){
 			e.setCancelled(true);
 		if(e.getEntityType() == EntityType.PLAYER){
 			Player p = (Player) e.getEntity();
